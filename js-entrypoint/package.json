@@ -1,0 +1,9 @@
+{
+  "name": "js-entrypoint",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "test-automation-lib": "1.0.0"
+  }
+}
