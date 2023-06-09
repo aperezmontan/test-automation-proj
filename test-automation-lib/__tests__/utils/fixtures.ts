@@ -107,6 +107,7 @@ export const SimpsonsSecondCSV = [
   [`Marge`, ` Simpson`, `41`, ` Oregon`],
   [`Linel`, ` Hutz`, `42`, ` Oregon`],
   [`Sideshow`, ` Bob`, `53`, ` Oregon`], // This is not in the first list
+  [`Marge`, ` Simpson`, `41`, ` Oregon`], // This is a repeat. It should not show twice
   ['', '', '18', ''],
 ]
 
