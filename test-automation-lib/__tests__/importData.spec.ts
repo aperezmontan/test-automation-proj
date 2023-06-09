@@ -10,7 +10,7 @@ import {
   simpsonsColonCsvFileName,
   blankFileName,
 } from './utils/fixtures'
-import { createFile } from './utils/helpers';
+import { createFile } from '../utils/helpers';
 
 const simpsonsCsvFile = createFile({ data: SimpsonsCSV, fileName: simpsonsCsvFileName, type: `csv` });
 const simpsonsColonCsvFile = createFile({ data: SimpsonsCSVColonDelimeter, fileName: simpsonsColonCsvFileName, type: `csv` });
