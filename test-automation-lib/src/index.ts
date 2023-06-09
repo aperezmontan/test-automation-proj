@@ -1,52 +1,35 @@
-// INTERFACES
-
-// Options for the compare function
-interface CompareCostumerOptionsType {
-  firstFileDelimiter?: string;
-  secondFileDelimiter?: string;
-}
-
-// Adds a unique string to make comparing customers more straightfoward
-interface CostumerType extends CustomerEntityType {
-  uniqId: string;
-}
-
-// Customer is defined by firstName, lastName, age and state
-interface CustomerEntityType {
-  firstName: string;
-  lastName: string;
-  age: number;
-  stateOfResidence: string;
-}
-
 // IMPORTS
 
 import { Parser, parse } from 'csv-parse';
 import fs, { ReadStream } from 'fs';
+import { CustomerBuilder } from './CustomerBuilder';
+import { CustomerEntityType } from './Customer';
+import { Comparer } from './Comparer';
+
+// INTERFACES
+
+interface CustomerDataType {
+  [key: string]: CustomerEntityType
+}
+// interface CompareCostumerOptionsType {
+//   firstFileDelimiter?: string;
+//   secondFileDelimiter?: string;
+// }
 
 // FUNCTIONS
 
-// const getParser = () => {
-//   return ()
-// }
-
 // Imports the CSV data and returns it as an array of strings.
-// OR !! Could raise an error if the file is not found or the file is not a CSV
-export const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }) => {
-  let parsedData;
+export const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
+  let parsedData: string[][] = [[]];
   const readStream = fs.createReadStream(filePath);
 
   // TODO: see if you can push this up to the getParser function above
-  const parser: Parser = parse({ delimiter }, function (err, data) {
+  const parser: Parser = parse({ delimiter }, function (err, data: string[][]) {
     parsedData = data;
   });
 
   await parseData({ parser, readStream })
   return parsedData;
-}
-
-const createParser = () => {
-
 }
 
 const parseData = ({ parser, readStream }: { parser: Parser, readStream: ReadStream }): Promise<void> => {
@@ -59,47 +42,75 @@ const parseData = ({ parser, readStream }: { parser: Parser, readStream: ReadStr
   })
 }
 
-// Create the customers using the parsed Data
-export const createCustomers = (): CostumerType[] => {
-  return [];
-}
+// // Create the customers using the parsed Data
+// export const createCustomers = (): CustumerType[] => {
+//   return [];
+// }
 
-// Returns the customers that are in both lists
-const customerIntersection = ({ firstCustomerList, secondCostumerList }: { firstCustomerList: CostumerType[], secondCostumerList: CostumerType[] }): CostumerType[] => {
+// // Returns the customers that are in both lists
+// const customerIntersection = ({ firstCustomerList, secondCostumerList }: { firstCustomerList: CustumerType[], secondCostumerList: CustumerType[] }): CustumerType[] => {
+//   return []
+// }
+
+// // Displays the customers
+// const returnCustomers = ({ customers }: { customers: CustumerType[] }): void => {
+
+// }
+
+// const compare
+
+const generateCustomersFromData = ({ data }: { data: string[][] }): CustomerDataType[] => {
   return []
 }
 
-// Displays the customers
-const returnCustomers = ({ customers }: { customers: CostumerType[] }): void => {
+// const customerIntersection = ({ firstFileData, secondFileData }: { firstFileData: string[][], secondFileData: string[][] }): CustomerEntityType[] => {
+//   const firstFileCustomers = generateCustomersFromData({ data: firstFileData })
+//   const intersection = 
+//   return []
+// }
 
+const serialize = (element: any) => element?.getObj();
+
+export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): Promise<CustomerEntityType[]> => {
+  const firstFileData = await importData({ filePath: firstFileName });
+  const secondFileData = await importData({ filePath: secondFileName });
+
+  const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
+  const intersectingCustomers = comparer.intersection();
+
+
+
+  return intersectingCustomers.map(serialize)
+
+  const customerData = firstFileData.concat(secondFileData);
+
+  // console.log("firstFileData", firstFileData)
+  // console.log("secondFileData", secondFileData)
+
+
+  // new CustomerComparer({ firstFileCustomers, seco })
+  // return customerComparer.visit()
+
+  // return [{
+  //   firstName: "firstName",
+  //   lastName: "lastName",
+  //   age: 22,
+  //   stateOfResidence: "stateOfResidence"
+  // }].map(({ firstName, lastName, age, stateOfResidence }) => ({
+  //   firstName,
+  //   lastName,
+  //   age,
+  //   stateOfResidence,
+  // }) as CustomerEntityType);
 }
 
-export const compareCustomers = ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): CustomerEntityType[] => {
-  // createCostumers - (could filter at the same time to make this O(n) time)
-  // filterCommonCustomers
-  // returnFilteredCustomers
-  importData({ filePath: firstFileName });
-
-  return [{
-    firstName: "firstName",
-    lastName: "lastName",
-    age: 22,
-    stateOfResidence: "stateOfResidence"
-  }].map(({ firstName, lastName, age, stateOfResidence }) => ({
-    firstName,
-    lastName,
-    age,
-    stateOfResidence,
-  }) as CustomerEntityType);
-}
-
-export const createCostumer = ({ firstName, lastName, age, stateOfResidence }: { firstName: string, lastName: string, age: number, stateOfResidence: string }): CostumerType => {
-  const uniqId = `${firstName}${lastName}${age}${stateOfResidence}`
-  return {
-    uniqId,
-    firstName,
-    lastName,
-    age,
-    stateOfResidence,
-  } as CostumerType
-}
+// export const createCostumer = ({ firstName, lastName, age, stateOfResidence }: { firstName: string, lastName: string, age: number, stateOfResidence: string }): CustumerType => {
+//   const uniqId = `${firstName}${lastName}${age}${stateOfResidence}`
+//   return {
+//     uniqId,
+//     firstName,
+//     lastName,
+//     age,
+//     stateOfResidence,
+//   } as CustumerType
+// }
