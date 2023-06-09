@@ -7,6 +7,7 @@ interface ObjectType {
 
 export class Comparer {
   private firstFileObject: ObjectType = {};
+  private secondFileObject: ObjectType = {};
   private firstFileData: string[][];
   private secondFileData: string[][];
   private builder: typeof CustomerBuilder
@@ -45,8 +46,10 @@ export class Comparer {
         const newBuilder = new this.builder({ data })
         const newItem = newBuilder.build();
 
-        if (this.firstFileObject[newItem.getUniqId()])
+        if (this.firstFileObject[newItem.getUniqId()] && !this.secondFileObject[newItem.getUniqId()]) {
+          this.secondFileObject[newItem.getUniqId()] = true; // Value here doens't matter. Just need the ID to compare
           intersectingObjects.push(newItem)
+        }
 
       } catch (error) {
         this.handleError({ error })
