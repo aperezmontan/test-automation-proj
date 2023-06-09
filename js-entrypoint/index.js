@@ -6,12 +6,18 @@ const createFileNameWithPath = ({ fileName }) => {
   return path.join(basePath, fileName);
 }
 
-const firstFileName = createFileNameWithPath({ fileName: 'Store1.csv' });
-const secondFileName = createFileNameWithPath({ fileName: 'Store2.csv' });
-compareCustomers({ firstFileName, secondFileName })
+const compareFiles = ({firstFileName, secondFileName, saveToFile = null}) => {
+  const firstFileNameWithPath = createFileNameWithPath({ fileName: firstFileName || 'Store1.csv' });
+  const secondFileNameWithPath = createFileNameWithPath({ fileName: secondFileName || 'Store2.csv' });
 
-// Happy path
-// console.log(compareCustomers("Store1.csv", "Store2.csv"));
+  console.log("firstFileNameWithPath", firstFileNameWithPath)
+  console.log("secondFileNameWithPath", secondFileNameWithPath)
 
-// Sad path 1
-// console.log(compareCustomers("Store1.csv", "Store2.csv"));
+  compareCustomers({ firstFileName: firstFileNameWithPath, secondFileName: secondFileNameWithPath })
+  .then((res) => {
+    console.log("Customers that are in both lists:", res)
+    // TODO: Make it so that if the user provides a filename you save it to a file
+  }).catch((error) => console.log("Uh oh, something went wrong ->", error))
+}
+
+exports.compareFiles = compareFiles;
