@@ -44,8 +44,12 @@ export class Comparer {
     return newBuilder.build();
   }
 
-  private handleError = ({ error = [""] }: { error: string[] | unknown }): void => {
-    console.warn(`Error while trying to build a new ${this.builder.name}:`, error)
+  private handleError = ({ error }: { error: Error | unknown }): void => {
+    if (error instanceof (Error)) {
+      console.warn(`Error while trying to build a new ${this.builder.name}:`, error.message)
+    } else {
+      console.warn(`Error while trying to build a new ${this.builder.name}:`, error)
+    }
   }
 
   private findIntersectingObjectsWithSecondFileData = (): ObjectType[] => {
@@ -60,7 +64,7 @@ export class Comparer {
         const newItem = this.buildNewItem({ data })
 
         if (this.firstFileObject[newItem.getUniqId()] && !intersectingMap[newItem.getUniqId()]) {
-          intersectingMap[newItem.getUniqId()] = true; // Value here doens't matter. Just need the ID to compare
+          intersectingMap[newItem.getUniqId()] = true; // Value here doesn't matter. Just need the ID to compare
           intersectingObjects.push(newItem)
         }
 
@@ -77,7 +81,7 @@ export class Comparer {
     this.firstFileData.forEach(data => {
       try {
         const newItem = this.buildNewItem({ data })
-        this.firstFileObject[newItem.getUniqId()] = true; // Value here doens't matter. Just need the ID to compare
+        this.firstFileObject[newItem.getUniqId()] = true; // Value here doesn't matter. Just need the ID to compare
       } catch (error) {
         this.handleError({ error })
       }

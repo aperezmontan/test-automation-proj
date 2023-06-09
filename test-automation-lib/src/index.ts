@@ -10,9 +10,13 @@ import { Comparer } from './Comparer';
 
 // The orchestrator
 export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): Promise<CustomerEntityType[]> => {
+  // console.log("firstFileName", firstFileName)
+  // console.log("secondFileName", secondFileName)
   const firstFileData = await importData({ filePath: firstFileName });
   const secondFileData = await importData({ filePath: secondFileName });
 
+  // console.log("firstFileData", firstFileData)
+  // console.log("secondFileData", secondFileData)
   const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
   const intersectingCustomers = comparer.intersection();
 
@@ -40,7 +44,7 @@ const parseData = ({ parser, readStream }: { parser: Parser, readStream: ReadStr
   return new Promise((resolve, reject) => {
     parser.on('end', () => resolve(parser.read()));
     readStream.on('error', (e) => console.log("Error in parseData", e));
-    readStream.on('close', () => { /* console.log("this would be a callback function" */ });
+    readStream.on('close', () => { /* console.log("DATA IMPORTED") */ });
   })
 }
 
