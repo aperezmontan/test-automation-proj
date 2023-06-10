@@ -1,7 +1,11 @@
+import sys
 import csv
 
 def convert_age_string_to_num(age_strg):
     return int(age_strg)
+
+def convert_data_to_csv_rows(data):
+    return [list(datum.values()) for datum in data]
 
 def csv_to_data_set(filename):
     fieldnames = ['first_name', 'last_name', 'age', 'state']
@@ -13,10 +17,46 @@ def csv_to_data_set(filename):
         for index, row in enumerate(reader):
             
             # Removes the header and ensures the data is valid before inserting it into the data_set
-            if index > 0 and valid(row):
+            if valid(row):
                 rows.append(row)
 
     return rows
+
+def intersection(first_data_set, second_data_set):
+    unique_members_first_set = {}
+    unique_members_second_set = {}
+    intersecting_set = []
+
+    # This is also O(n), but it takes up more space than the TypeScript implementation
+    # because we're creating 2 dictionaries. Would likely start to run faster than the 
+    # TypeScript version for high values of n
+    for datum in first_data_set:
+        uniq_id = ('').join(list(datum.values()))
+
+        if unique_members_first_set.get(uniq_id) == None:
+            unique_members_first_set[uniq_id] = datum
+
+    for datum in second_data_set:
+        uniq_id = ('').join(list(datum.values()))
+
+        if unique_members_second_set.get(uniq_id) == None:
+            unique_members_second_set[uniq_id] = datum
+
+    for k, v in unique_members_first_set.items():
+        if unique_members_second_set.get(k) != None:
+            intersecting_set.append(v)
+
+    return intersecting_set
+
+def print_intersection(intersection, fileName=None):
+    if fileName == None:
+        print('Customers that are in both lists: ', intersection)
+    else: 
+        csv_rows = convert_data_to_csv_rows(intersection)
+
+        with open(fileName, 'w', newline='') as csv_file:
+            writer = csv.writer(csv_file, dialect='excel')
+            writer.writerows(csv_rows)
 
 # VALIDATION
 
@@ -31,7 +71,24 @@ def valid_age(poss_num):
 def valid_string(poss_strg):
     return isinstance(poss_strg, str) and (len(poss_strg.strip()) > 0)
 
-# first_data_set = csv_to_data_set('Store1.csv')
-# second_data_set = csv_to_data_set('Store2.csv')
+argument_list = []
+first_file = None
+second_file = None
+output_file = None
 
-# print(first_data_set)
+for i in range(1, len(sys.argv[:4])):
+    argument_list.append(sys.argv[i].strip())
+
+if len(argument_list) == 3:
+    [first_file, second_file, output_file] = argument_list
+elif len(argument_list) == 2:
+    [first_file, second_file] = argument_list
+elif len(argument_list) == 1:
+    [first_file] = argument_list
+else: 
+    None
+
+first_data_set = csv_to_data_set(first_file or 'Store1.csv')
+second_data_set = csv_to_data_set(second_file or 'Store2.csv')
+intersecting_members = intersection(first_data_set, second_data_set)
+print_intersection(intersecting_members, output_file)
