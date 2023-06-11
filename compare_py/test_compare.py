@@ -2,7 +2,7 @@ import os
 import csv
 import unittest
 import compare
-from unittest.mock import call, patch
+from unittest.mock import patch, call
 
 invalid_file = 'invalid_file.csv'
 valid_file = 'valid.csv'
@@ -39,6 +39,10 @@ class TestCompare(unittest.TestCase):
         os.remove(valid_file)
         os.remove(valid_file_with_invalid_entries)
         os.remove('text.txt')
+
+        # Needed to remove the file that gets created in test_print_intersection
+        if os.path.isfile('file.csv'):
+            os.remove('file.csv')
 
     def test_convert_data_to_csv_rows(self):
         self.assertCountEqual(compare.convert_data_to_csv_rows(valid_csv_result), valid_rows)
@@ -130,7 +134,7 @@ class TestCompare(unittest.TestCase):
 
         # With a filename, it saves the intersection to a file
         compare.print_intersection(intersection, fileName='file.csv')
-        mock_print.assert_not_called()
+        mock_print.assert_called_with('Customers saved to: ', 'file.csv')
         mock_convert.assert_called_with(intersection)
         mock_write.assert_called()
 
