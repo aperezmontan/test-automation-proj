@@ -6,8 +6,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "setup": "yarn install yarn build yarn link",
-    "test": "jest",
+    "setup": "yarn build && yarn link",
+    "setup2": "yarn build && yarn link -r ../js-entrypoint",
+    "test": "jest --silent",
     "test-debug": "jest --watch"
   },
   "devDependencies": {
@@ -20,5 +21,8 @@
   "dependencies": {
     "csv-parse": "^5.4.0",
     "fs": "^0.0.1-security"
+  },
+  "resolutions": {
+    "js-entrypoint": "portal:../js-entrypoint"
   }
 }

@@ -1,4 +1,3 @@
-import sys
 import csv
 
 def convert_age_string_to_num(age_strg):
@@ -14,7 +13,7 @@ def csv_to_data_set(filename):
     with open(filename, 'r') as csv_file:
         reader = csv.DictReader(csv_file, fieldnames)
 
-        for index, row in enumerate(reader):
+        for row in reader:
             
             # Removes the header and ensures the data is valid before inserting it into the data_set
             if valid(row):
@@ -58,6 +57,8 @@ def print_intersection(intersection, fileName=None):
             writer = csv.writer(csv_file, dialect='excel')
             writer.writerows(csv_rows)
 
+        print('Customers saved to: ', fileName)
+
 # VALIDATION
 
 def valid(datum):
@@ -70,25 +71,3 @@ def valid_age(poss_num):
 # Make sure it's a string and that it is not empty
 def valid_string(poss_strg):
     return isinstance(poss_strg, str) and (len(poss_strg.strip()) > 0)
-
-argument_list = []
-first_file = None
-second_file = None
-output_file = None
-
-for i in range(1, len(sys.argv[:4])):
-    argument_list.append(sys.argv[i].strip())
-
-if len(argument_list) == 3:
-    [first_file, second_file, output_file] = argument_list
-elif len(argument_list) == 2:
-    [first_file, second_file] = argument_list
-elif len(argument_list) == 1:
-    [first_file] = argument_list
-else: 
-    None
-
-first_data_set = csv_to_data_set(first_file or 'Store1.csv')
-second_data_set = csv_to_data_set(second_file or 'Store2.csv')
-intersecting_members = intersection(first_data_set, second_data_set)
-print_intersection(intersecting_members, output_file)

@@ -101,6 +101,93 @@ export const GoodSimpsonsCSVResult = [
   [`Krusty`, ` Clown`, `51`, ` Oregon`],
 ]
 
+export const GoodSimpsonsComparerResult = [
+  {
+    "age": 45,
+    "firstName": "Homer",
+    "lastName": " Simpson",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 58,
+    "firstName": "Seymour",
+    "lastName": " Skinner",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 10,
+    "firstName": "Bart",
+    "lastName": " Simpson",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 102,
+    "firstName": "Montgomery",
+    "lastName": " Burns",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 48,
+    "firstName": "Mayor",
+    "lastName": " Quimby",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 55,
+    "firstName": "Waylon",
+    "lastName": " Smithers",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 41,
+    "firstName": "Barney",
+    "lastName": " Gumble",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 41,
+    "firstName": "Marge",
+    "lastName": " Simpson",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 47,
+    "firstName": "Edna",
+    "lastName": " Krabappel",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 8,
+    "firstName": "Lisa",
+    "lastName": " Simpson",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 3,
+    "firstName": "Maggie",
+    "lastName": " Simpson",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 42,
+    "firstName": "Linel",
+    "lastName": " Hutz",
+    "stateOfResidence": " Oregon",
+  },
+  {
+    "age": 47,
+    "firstName": "Troy",
+    "lastName": " McClure",
+    "stateOfResidence": " California",
+  },
+  {
+    "age": 51,
+    "firstName": "Krusty",
+    "lastName": " Clown",
+    "stateOfResidence": " Oregon",
+  }
+]
+
 export const SimpsonsSecondCSV = [
   [`First Name`, `Last Name`, ` Age`, `State`],
   [`Bart`, ` Simpson`, `10`, ` Oregon`],

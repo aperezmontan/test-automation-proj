@@ -2,33 +2,39 @@
 
 import { Parser, parse } from 'csv-parse';
 import fs, { ReadStream } from 'fs';
+import path from 'path';
 import { CustomerBuilder } from './CustomerBuilder';
 import { CustomerEntityType } from './Customer';
 import { Comparer } from './Comparer';
 
+interface OptionsType {
+  firstFileDelimiter?: string | undefined;
+  secondFileDelimiter?: string | undefined
+}
+
 // FUNCTIONS
 
 // The orchestrator
-export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): Promise<CustomerEntityType[]> => {
-  // console.log("firstFileName", firstFileName)
-  // console.log("secondFileName", secondFileName)
-  const firstFileData = await importData({ filePath: firstFileName });
-  const secondFileData = await importData({ filePath: secondFileName });
+export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: OptionsType }): Promise<CustomerEntityType[]> => {
+  const { firstFileDelimiter, secondFileDelimiter } = options;
+  const firstFileData = await importData({ filePath: firstFileName, delimiter: firstFileDelimiter });
+  const secondFileData = await importData({ filePath: secondFileName, delimiter: secondFileDelimiter });
 
-  // console.log("firstFileData", firstFileData)
-  // console.log("secondFileData", secondFileData)
+  // NOTE: explain the dependency injection here with CustomerBuilder
   const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
   const intersectingCustomers = comparer.intersection();
-
+  // console.log("intersection", intersection)
   return intersectingCustomers.map(serialize)
 }
 
+export const createFileNameWithPath = ({ fileName }: { fileName: string }): string => path.join(__dirname, "../../", fileName);
+
 // Imports the CSV data and returns it as an array of strings.
-export const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
+// TODO: add the ability to specify a delimiter
+const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
   let parsedData: string[][] = [[]];
   const readStream = fs.createReadStream(filePath);
 
-  // TODO: see if you can push this up to the getParser function above
   const parser: Parser = parse({ delimiter }, function (err, data: string[][]) {
     parsedData = data;
   });
@@ -49,3 +55,8 @@ const parseData = ({ parser, readStream }: { parser: Parser, readStream: ReadStr
 }
 
 const serialize = (element: any) => element?.getObj();
+
+export const exportedForTesting = {
+  importData,
+  serialize
+}

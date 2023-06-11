@@ -31,8 +31,4 @@ export class Customer {
   }
 
   getUniqId = (): string => this.uniqId;
-
-  // NOTE: this method isn't used in the code. Initially hought it might be useful. 
-  // It is well tested though so thought it would be good to leave in for this exercise.
-  isEqual = ({ otherCustomer }: { otherCustomer: Customer }): boolean => this.uniqId === otherCustomer.uniqId;
 }
