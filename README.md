@@ -90,7 +90,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![GIF of the project working][product-screenshot]](https://example.com)
+NOTE: ADD THIS [![GIF of the project working][product-screenshot]](https://example.com)
 
 The good folks at Blockgraph asked my to complete this take home project with the intention of evaluating my general engineering capabilities. They sent me a zip file which included a README, the contents of which, Instructions, Deliverible and Hints, is included below:
 
