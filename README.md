@@ -3,7 +3,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center" style="background-color: #010b23; padding-top: 10px">
   <a href="https://github.com/github_username/repo_name">
     <img src="images/logo.svg" alt="Logo" width="200" height="50">
   </a>
