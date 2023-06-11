@@ -357,46 +357,24 @@ You should now see the file `new_comparison.csv` containing all of the customers
 
 ### Running Tests
 
-Running tests is also straightforward. The only caveat is that you have to run them from their respective folders, `js-entrypoint` and `test-automation-lib`:
+NOTE: tests only run in test-automation-lib
 
-- `js-entrypoint`
-
-  ```sh
-    js-entrypoint:> yarn test
-    yarn run v2
-    $ jest
-    PASS  __tests__/importData.spec.ts
-    PASS  __tests__/CustomerValidator.spec.ts
-    PASS  __tests__/Comparer.spec.ts
-    PASS  __tests__/CustomerBuilder.spec.ts
-    PASS  __tests__/Customer.spec.ts
-
-    Test Suites: 5 passed, 5 total
-    Tests:       21 passed, 21 total
-    Snapshots:   0 total
-    Time:        5.222 s, estimated 6 s
-    Ran all test suites.
-    ✨  Done in 6.13s.
-   ```
-
-- `test-automation-lib`
+Running tests is also straightforward. All the functionality that needs to be tested is in the `test-automation-lib`. From that folder, run `yarn test`:
 
   ```sh
-    test-automation-proj:> yarn test
-    yarn run v2
-    $ jest
-    PASS  __tests__/importData.spec.ts
-    PASS  __tests__/CustomerValidator.spec.ts
-    PASS  __tests__/Comparer.spec.ts
-    PASS  __tests__/CustomerBuilder.spec.ts
-    PASS  __tests__/Customer.spec.ts
+    test-automation-proj:>  yarn test
+    PASS  __tests__/Comparer.spec.ts (5.542 s)
+    PASS  __tests__/Customer.spec.ts (5.521 s)
+    PASS  __tests__/CustomerBuilder.spec.ts (5.597 s)
+    PASS  __tests__/importData.spec.ts (5.633 s)
+    PASS  __tests__/compareCustomers.spec.ts (5.667 s)
+    PASS  __tests__/CustomerValidator.spec.ts (5.651 s)
+    PASS  __tests__/createFileNameWithPath.spec.ts (5.691 s)
 
-    Test Suites: 5 passed, 5 total
-    Tests:       21 passed, 21 total
+    Test Suites: 7 passed, 7 total
+    Tests:       23 passed, 23 total
     Snapshots:   0 total
-    Time:        5.222 s, estimated 6 s
-    Ran all test suites.
-    ✨  Done in 6.13s.
+    Time:        6.405 s, estimated 8 s
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -423,8 +401,15 @@ You'll notice that the `test-automation-lib` has a much more Object Oriented app
   ...
    ```
   These are really just warnings and they come as a result of making the app more robust. It doesn't assume the file has headers and doesn't assume that all the rows have valid data. When it encounters either of these situations, it raises a warning. Thought it would be more informative to show these errors rather than supress them but wanted to point it out.
-- The `randomBadData` helper in the `CustomerValidator.spec.ts` file randomly . Not sure if this is best testing practice, but I do think that throwing some inconsistency into testing, *__if it can be properly controlled__* (I understand this can be a __BIG IF__), is very useful. Like [Chaos Monkey](https://netflix.github.io/chaosmonkey/) at Netflix, which "randomly terminating instances in production to ensure that engineers implement their services to be resilient to instance failures", I think a bit of randomness can be good to test your systems. As always, these are strong convictions loosely held. Would love to discuss more with the team !!
-- There's a __TODO__ in the `importData` function to be able to specify a delimiter. Some files use tabs or semi colons. Being able to specify a delimiter would make this implementation a bit more robust.
+
+- TESTS: 
+  1. Similar to the Python version, there are no tests for the `js-entrypoint.index.js` file. I think that's ok because all the functions that are called by that file are tested in the TypeScript section.
+
+  2. I'm not really happy with how I tested the `compareCustomers` function. It's basically an integration test, which does have some merit. However, for these kinds of "orchestration" functions, I prefer to just ensure that it's calling the correct functions in the correct order. However, I was having trouble with the mocking functionality in Jest so I couldn't get it to work the way I would have preferred.
+  
+  3. The `randomBadData` helper in the `CustomerValidator.spec.ts` file randomly chooses different attributes to fail on. Not sure if this is best testing practice, but I do think that throwing some inconsistency into testing, *__if it can be properly controlled__* (I understand this can be a __BIG IF__), is very useful. Like [Chaos Monkey](https://netflix.github.io/chaosmonkey/) at Netflix, which "randomly terminating instances in production to ensure that engineers implement their services to be resilient to instance failures", I think a bit of randomness can be good to test your systems. As always, these are strong convictions loosely held. Would love to discuss more with the team !!
+
+- There's a __TODO__ in the `compareCustomers` function to be able to specify a delimiter. Some files use tabs or semi colons. Being able to specify a delimiter would make this implementation a bit more robust.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
