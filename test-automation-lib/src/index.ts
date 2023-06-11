@@ -10,13 +10,9 @@ import { Comparer } from './Comparer';
 
 // The orchestrator
 export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): Promise<CustomerEntityType[]> => {
-  // console.log("firstFileName", firstFileName)
-  // console.log("secondFileName", secondFileName)
   const firstFileData = await importData({ filePath: firstFileName });
   const secondFileData = await importData({ filePath: secondFileName });
 
-  // console.log("firstFileData", firstFileData)
-  // console.log("secondFileData", secondFileData)
   const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
   const intersectingCustomers = comparer.intersection();
 
@@ -24,11 +20,11 @@ export const compareCustomers = async ({ firstFileName, secondFileName, options 
 }
 
 // Imports the CSV data and returns it as an array of strings.
+// TODO: add the ability to specify a delimiter
 export const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
   let parsedData: string[][] = [[]];
   const readStream = fs.createReadStream(filePath);
 
-  // TODO: see if you can push this up to the getParser function above
   const parser: Parser = parse({ delimiter }, function (err, data: string[][]) {
     parsedData = data;
   });

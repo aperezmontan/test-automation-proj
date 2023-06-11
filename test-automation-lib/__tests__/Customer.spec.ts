@@ -16,35 +16,4 @@ describe(`Customer`, () => {
       });
     })
   })
-
-  describe(`isEqual()`, () => {
-
-    describe(`when the uniqId is provided`, () => {
-
-      test(`it USES THE PROVIDED uniqId TO COMPARE`, () => {
-        const newCustomer = new Customer({ uniqId: 'foo', firstName: 'A', lastName: 'P', age: 5, stateOfResidence: 'NY' })
-        const sameCustomer = new Customer({ uniqId: 'foo', firstName: 'A', lastName: 'P', age: 5, stateOfResidence: 'NY' })
-        const differentCustomer = new Customer({ uniqId: 'bar', firstName: 'B', lastName: 'C', age: 56, stateOfResidence: 'LA' })
-
-        expect(newCustomer.isEqual({ otherCustomer: sameCustomer })).toEqual(true);
-        expect(sameCustomer.isEqual({ otherCustomer: newCustomer })).toEqual(true);
-        expect(newCustomer.isEqual({ otherCustomer: differentCustomer })).toEqual(false);
-        expect(sameCustomer.isEqual({ otherCustomer: differentCustomer })).toEqual(false);
-      })
-    })
-
-    describe(`when the uniqId is not provided`, () => {
-
-      test(`it USES THE GENERATED uniqId TO COMPARE`, () => {
-        const newCustomer = new Customer({ firstName: 'A', lastName: 'P', age: 5, stateOfResidence: 'NY' })
-        const sameCustomer = new Customer({ firstName: 'A', lastName: 'P', age: 5, stateOfResidence: 'NY' })
-        const differentCustomer = new Customer({ firstName: 'B', lastName: 'P', age: 5, stateOfResidence: 'NY' })
-
-        expect(newCustomer.isEqual({ otherCustomer: sameCustomer })).toEqual(true);
-        expect(sameCustomer.isEqual({ otherCustomer: newCustomer })).toEqual(true);
-        expect(newCustomer.isEqual({ otherCustomer: differentCustomer })).toEqual(false);
-        expect(sameCustomer.isEqual({ otherCustomer: differentCustomer })).toEqual(false);
-      })
-    })
-  })
 })

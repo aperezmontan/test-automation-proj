@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "setup": "yarn install yarn build yarn link",
+    "setup": "yarn build && yarn link",
     "test": "jest",
     "test-debug": "jest --watch"
   },
