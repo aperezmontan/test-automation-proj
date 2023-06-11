@@ -182,7 +182,7 @@ As you can see from the example above, the default output is an array of diction
 
 ### Using Other Data
 
-The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to 
+The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to: 
 
 1. Make sure your data is in a CSV in the same format as the Store files (*comma delimmited and with First Name,Last Name,Age,State as headers*). 
 2. Copy your data CSV file into the root directory.
@@ -283,6 +283,8 @@ NOTE: CHANGE THIS TO THE LATEST VERSIONS
     ➤ YN0061: │ @npmcli/move-file@npm:2.0.1 is deprecated: This functionality has been moved to @npmcli/fs
     ➤ YN0000: └ Completed in 4s 591ms
     ...
+    ...
+    ...
     ➤ YN0000: Done with warnings in 9s 45ms
 
     test-automation-lib:> yarn build
@@ -290,31 +292,56 @@ NOTE: CHANGE THIS TO THE LATEST VERSIONS
 
 - *__CAVEAT IF RUNNING LESS THAN Yarn 2__*: instead of running `yarn build` you should run `yarn setup`.
 
-4. 
+4. NOTE: FINISH WRITING OUT THE INSTALLATION INSTRUCTIONS
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-Once you've got Node and Yarn installed, running it should be a cinch. From the root folder, just type `python3` with the name of the file to run the script:
+## Usage
+Once you've got Node and Yarn installed, running it should be very straightforward. From the root folder, just type `node` with the name of the file to run the script:
 
    ```sh
-    test-automation-proj:> python3 compare_py/run.py
-    Customers that are in both lists:  [{'first_name': 'James', 'last_name': 'Davis', ...
+  test-automation-proj:> node js-entrypoint/index.js 
+Error while trying to build a new CustomerBuilder: age ""Age"" is invalid
+...
+...
+Customers that are in both lists: [
+  {
+    firstName: 'Charlotte',
+    lastName: 'Wilson',
+    age: 58,
+    stateOfResidence: 'Idaho'
+  },
+  {
+    firstName: 'James',
+    lastName: 'Davis',
+  ...
    ```
+
+- *NOTE: there will be a series of errors before the final result is returned. This is addressed [here](#other-considerations-1).*
 
 As you can see from the example above, the default output is an array of dictionaries listing the customers who have patronized both stores.
 
 ### Using Other Data
 
-The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to 
+The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to: 
 
 1. Make sure your data is in a CSV in the same format as the Store files (*comma delimmited and with First Name,Last Name,Age,State as headers*). 
 2. Copy your data CSV file into the root directory.
 3. To run the app against your data, you'll need to specify the file names you'd like to compare. For example, if the file you copied over is called `custom_data.csv`, and you'd like to compare that file with the provided `Store1.csv`, the command would look something like this:
 
    ```sh
-    ~> python3 compare_py/run.py Store1.csv custom_data.csv
-    Customers that are in both lists:  [{'first_name': 'Leo', 'last_name': ...]
+    test-automation-proj:> node js-entrypoint/index.js Store1.csv custom_data.csv
+    ...
+    ...
+    Customers that are in both lists: [
+      {
+        firstName: 'Harper',
+        lastName: 'Jackson',
+        age: 44,
+        stateOfResidence: 'Wisconsin'
+      },
+    ...
     ```
 
 ### Output To File
@@ -322,21 +349,20 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
 Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
 
    ```sh
-    test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
-    Customers saved to:  new_comparison.csv
+    test-automation-proj:> node js-entrypoint/index.js Store1.csv custom_data.csv new_comparison.csv
+    ...
+    Results written to new_comparison.csv
    ```
 You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.
 
 ### Running Tests
 
-Running tests is relatively straightforward. The only caveat is that you have to run them from their respective folders, `js-entrypoint` and `test-automation-lib`:
+Running tests is also straightforward. The only caveat is that you have to run them from their respective folders, `js-entrypoint` and `test-automation-lib`:
 
 - `js-entrypoint`
 
-NOTE: FINISH THIS
-
   ```sh
-    ~> yarn test
+    js-entrypoint:> yarn test
     yarn run v2
     $ jest
     PASS  __tests__/importData.spec.ts
@@ -356,7 +382,7 @@ NOTE: FINISH THIS
 - `test-automation-lib`
 
   ```sh
-    ~> yarn test
+    test-automation-proj:> yarn test
     yarn run v2
     $ jest
     PASS  __tests__/importData.spec.ts
@@ -396,7 +422,7 @@ You'll notice that the `test-automation-lib` has a much more Object Oriented app
   Error while trying to build a new CustomerBuilder: firstName is required, lastName is required, stateOfResidence is required
   ...
    ```
-  These are really just warnings and they come as a result of making the app more robust. It doesn't assume the file has headers and doesn't assume that all the rows have valid data. When it encounters either of these situations, it raises a warning. Not sure if it makes sense to supress this or not but wanted to point it out.
+  These are really just warnings and they come as a result of making the app more robust. It doesn't assume the file has headers and doesn't assume that all the rows have valid data. When it encounters either of these situations, it raises a warning. Thought it would be more informative to show these errors rather than supress them but wanted to point it out.
 - The `randomBadData` helper in the `CustomerValidator.spec.ts` file randomly . Not sure if this is best testing practice, but I do think that throwing some inconsistency into testing, *__if it can be properly controlled__* (I understand this can be a __BIG IF__), is very useful. Like [Chaos Monkey](https://netflix.github.io/chaosmonkey/) at Netflix, which "randomly terminating instances in production to ensure that engineers implement their services to be resilient to instance failures", I think a bit of randomness can be good to test your systems. As always, these are strong convictions loosely held. Would love to discuss more with the team !!
 - There's a __TODO__ in the `importData` function to be able to specify a delimiter. Some files use tabs or semi colons. Being able to specify a delimiter would make this implementation a bit more robust.
 

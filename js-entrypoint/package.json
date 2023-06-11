@@ -13,5 +13,8 @@
   },
   "resolutions": {
     "test-automation-lib": "portal:../test-automation-lib"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
   }
 }
