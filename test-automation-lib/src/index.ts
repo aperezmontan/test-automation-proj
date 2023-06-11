@@ -2,6 +2,7 @@
 
 import { Parser, parse } from 'csv-parse';
 import fs, { ReadStream } from 'fs';
+import path from 'path';
 import { CustomerBuilder } from './CustomerBuilder';
 import { CustomerEntityType } from './Customer';
 import { Comparer } from './Comparer';
@@ -19,9 +20,11 @@ export const compareCustomers = async ({ firstFileName, secondFileName, options 
   return intersectingCustomers.map(serialize)
 }
 
+export const createFileNameWithPath = ({ fileName }: { fileName: string }): string => path.join(__dirname, "../", fileName);
+
 // Imports the CSV data and returns it as an array of strings.
 // TODO: add the ability to specify a delimiter
-export const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
+const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
   let parsedData: string[][] = [[]];
   const readStream = fs.createReadStream(filePath);
 
@@ -45,3 +48,8 @@ const parseData = ({ parser, readStream }: { parser: Parser, readStream: ReadStr
 }
 
 const serialize = (element: any) => element?.getObj();
+
+export const exportedForTesting = {
+  importData,
+  serialize
+}

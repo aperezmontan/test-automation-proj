@@ -1,5 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
-import { importData } from '../src';
+import { exportedForTesting } from '../src';
+const { importData } = exportedForTesting;
+
 import {
   SimpsonsCSV,
   SimpsonsCSVColonDelimeter,
