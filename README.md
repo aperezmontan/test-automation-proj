@@ -189,7 +189,7 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
 3. To run the app against your data, you'll need to specify the file names you'd like to compare. For example, if the file you copied over is called `custom_data.csv`, and you'd like to compare that file with the provided `Store1.csv`, the command would look something like this:
 
    ```sh
-    ~> python3 compare_py/run.py Store1.csv custom_data.csv
+    test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv
     Customers that are in both lists:  [{'first_name': 'Leo', 'last_name': ...]
     ```
 
@@ -198,7 +198,7 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
 Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
 
    ```sh
-    ~> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
+    test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
     Customers saved to:  new_comparison.csv
    ```
 You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.
@@ -208,7 +208,7 @@ You should now see the file `new_comparison.csv` containing all of the customers
 Running tests is relatively straightforward. To see the tests run, just type:
 
    ```sh
-    ~> python3 compare_py/test_compare.py 
+  test-automation-proj:> python3 compare_py/test_compare.py 
 ........
 ----------------------------------------------------------------------
 Ran 8 tests in 0.017s
@@ -243,10 +243,10 @@ This project is also written in TypeScript, which gets compiled to JavaScript. S
 
 ### Prerequisites
 
-To get it up and running, you'll need to have Yarn and Node installed. Ideally you have the latest versions of each, however, it will work with at least:
+To get it up and running, you'll need to have Yarn and Node at __these minimum versions__:
 
-- Node 16 (NOTE: TEST THIS)
-- Yarn 1.22 (NOTE: TEST THIS ON YARN 2)
+- Node 16
+- Yarn 1.22
 
 ### Installation
 
@@ -269,12 +269,28 @@ NOTE: CHANGE THIS TO THE LATEST VERSIONS
 
    ```sh
     ~> node -v
-    v16.13.1
+    v18.16.0
     ~> yarn -v
-    1.22.10
+    3.6.0
    ```
 
-3. Next, you'll have to install the node 
+3. Now you can setup the app. First, go into the `test-automation-lib` folder and run:
+
+   ```sh
+    test-automation-lib:> yarn install
+    ➤ YN0000: ┌ Resolution step
+    ➤ YN0032: │ fsevents@npm:2.3.2: Implicit dependencies on node-gyp are discouraged
+    ➤ YN0061: │ @npmcli/move-file@npm:2.0.1 is deprecated: This functionality has been moved to @npmcli/fs
+    ➤ YN0000: └ Completed in 4s 591ms
+    ...
+    ➤ YN0000: Done with warnings in 9s 45ms
+
+    test-automation-lib:> yarn build
+   ```
+
+- *__CAVEAT IF RUNNING LESS THAN Yarn 2__*: instead of running `yarn build` you should run `yarn setup`.
+
+4. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -282,7 +298,7 @@ NOTE: CHANGE THIS TO THE LATEST VERSIONS
 Once you've got Node and Yarn installed, running it should be a cinch. From the root folder, just type `python3` with the name of the file to run the script:
 
    ```sh
-    test-automation-proj ~> python3 compare_py/run.py
+    test-automation-proj:> python3 compare_py/run.py
     Customers that are in both lists:  [{'first_name': 'James', 'last_name': 'Davis', ...
    ```
 
@@ -306,7 +322,7 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
 Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
 
    ```sh
-    ~> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
+    test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
     Customers saved to:  new_comparison.csv
    ```
 You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.

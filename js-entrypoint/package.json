@@ -5,9 +5,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "setup": "yarn link 'test-automation-lib'"
+    "setup": "yarn link 'test-automation-lib'",
+    "setup2": "yarn link -r ../test-automation-lib"
   },
   "dependencies": {
     "test-automation-lib": "1.0.0"
+  },
+  "resolutions": {
+    "test-automation-lib": "portal:../test-automation-lib"
   }
 }
