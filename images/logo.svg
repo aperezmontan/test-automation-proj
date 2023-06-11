@@ -1,11 +1,8 @@
-<svg class="logo-container" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.34 41.71">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 246.34 41.71">
   <defs>
     <style>
-      .cls-1{fill:#fff;}
+      .cls-1{fill:#0087ff;}
       .cls-2{fill:#0087ff;}
-      .logo-container {
-        background-color: #010b23
-      }
     </style>
   </defs>
   <g id="Layer_2" data-name="Layer 2">

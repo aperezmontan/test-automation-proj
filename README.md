@@ -5,7 +5,7 @@
 <br />
 <div class="logo-container" align="center">
   <a href="https://www.blockgraph.co/">
-    <img src="images/logo.svg" alt="Logo" width="300" height="100">
+    <img src="images/logo.svg" alt="Logo" width="200" height="50">
   </a>
 </div>
 
