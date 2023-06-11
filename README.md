@@ -90,7 +90,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-NOTE: ADD THIS [![GIF of the project working][product-screenshot]](https://example.com)
+<center>
+  <img src="images/test-automation-proj-sg.gif">
+</center>
 
 The good folks at Blockgraph asked my to complete this take home project with the intention of evaluating my general engineering capabilities. They sent me a zip file which included a README, the contents of which, Instructions, Deliverible and Hints, is included below:
 
