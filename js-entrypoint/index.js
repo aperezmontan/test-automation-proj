@@ -1,11 +1,8 @@
-const path = require("path");
 const fs = require("fs");
-const { compareCustomers } = require("test-automation-lib");
-
-const createFileNameWithPath = ({ fileName }) => {
-  const basePath = path.join(__dirname, "../");
-  return path.join(basePath, fileName);
-};
+const {
+  compareCustomers,
+  createFileNameWithPath,
+} = require("test-automation-lib");
 
 let firstFileName, secondFileName, saveToFile;
 
