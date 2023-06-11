@@ -247,8 +247,8 @@ This project is also written in TypeScript, which gets compiled to JavaScript. S
 
 To get it up and running, you'll need to have Yarn and Node at __these minimum versions__:
 
-- Node 16
-- Yarn 1.22
+- Node 18
+- Yarn 3
 
 ### Installation
 
@@ -274,7 +274,7 @@ Otherwise, you can use the links below :
     3.6.0
    ```
 
-3. Now you can setup the app. First, go into the `test-automation-lib` folder and run:
+3. Now you can setup the app. First, go into the `test-automation-lib` folder and run `yarn install` followed by `yarn build`:
 
    ```sh
     test-automation-lib:> yarn install
@@ -290,15 +290,26 @@ Otherwise, you can use the links below :
     test-automation-lib:> yarn build
    ```
 
-- *__CAVEAT IF RUNNING LESS THAN Yarn 2__*: instead of running `yarn build` you should run `yarn setup`.
 
-4. NOTE: FINISH WRITING OUT THE INSTALLATION INSTRUCTIONS
+4. Once that's finished, we have to setup the `js-entrypoint` folder to be able to use the compiled JavaScript from the `test-automation-lib`. To do this, just run `yarn setup`
+
+   ```sh
+    js-entrypoint:> yarn setup
+    ➤ YN0000: ┌ Resolution step
+    ➤ YN0000: └ Completed
+    ➤ YN0000: ┌ Fetch step
+    ...
+    ...
+    ...
+    ➤ YN0000: Done with warnings in 0s 187ms
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Once you've got Node and Yarn installed, running it should be very straightforward. From the root folder, just type `node` with the name of the file to run the script:
+
+Once you've got Node and Yarn installed and you've run all of the compilation scripts, running it should be very straightforward. From the root folder, just type `node` with the name of the file to run the script:
 
    ```sh
   test-automation-proj:> node js-entrypoint/index.js 
@@ -357,7 +368,7 @@ You should now see the file `new_comparison.csv` containing all of the customers
 
 ### Running Tests
 
-NOTE: tests only run in test-automation-lib
+*__NOTE: tests only run in test-automation-lib__*
 
 Running tests is also straightforward. All the functionality that needs to be tested is in the `test-automation-lib`. From that folder, run `yarn test`:
 
