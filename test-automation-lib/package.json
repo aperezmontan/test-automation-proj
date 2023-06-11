@@ -8,7 +8,7 @@
     "dev": "tsc --watch",
     "setup": "yarn build && yarn link",
     "setup2": "yarn build && yarn link -r ../js-entrypoint",
-    "test": "jest",
+    "test": "jest --silent",
     "test-debug": "jest --watch"
   },
   "devDependencies": {

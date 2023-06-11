@@ -7,16 +7,23 @@ import { CustomerBuilder } from './CustomerBuilder';
 import { CustomerEntityType } from './Customer';
 import { Comparer } from './Comparer';
 
+interface OptionsType {
+  firstFileDelimiter?: string | undefined;
+  secondFileDelimiter?: string | undefined
+}
+
 // FUNCTIONS
 
 // The orchestrator
-export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: {} }): Promise<CustomerEntityType[]> => {
-  const firstFileData = await importData({ filePath: firstFileName });
-  const secondFileData = await importData({ filePath: secondFileName });
+export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: OptionsType }): Promise<CustomerEntityType[]> => {
+  const { firstFileDelimiter, secondFileDelimiter } = options;
+  const firstFileData = await importData({ filePath: firstFileName, delimiter: firstFileDelimiter });
+  const secondFileData = await importData({ filePath: secondFileName, delimiter: secondFileDelimiter });
 
+  // NOTE: explain the dependency injection here with CustomerBuilder
   const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
   const intersectingCustomers = comparer.intersection();
-
+  // console.log("intersection", intersection)
   return intersectingCustomers.map(serialize)
 }
 
