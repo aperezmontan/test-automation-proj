@@ -6,6 +6,6 @@ describe(`createFileNameWithPath`, () => {
 
   test(`should PROPERLY FORMAT THE PATH`, () => {
     const fileNameWithPath = createFileNameWithPath({ fileName: "foo" })
-    expect(fileNameWithPath).toEqual(path.join(__dirname, "../", "foo"));
+    expect(fileNameWithPath).toEqual(path.join(__dirname, "../../", "foo"));
   })
 })

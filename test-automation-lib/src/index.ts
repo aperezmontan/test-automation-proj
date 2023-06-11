@@ -20,7 +20,7 @@ export const compareCustomers = async ({ firstFileName, secondFileName, options 
   return intersectingCustomers.map(serialize)
 }
 
-export const createFileNameWithPath = ({ fileName }: { fileName: string }): string => path.join(__dirname, "../", fileName);
+export const createFileNameWithPath = ({ fileName }: { fileName: string }): string => path.join(__dirname, "../../", fileName);
 
 // Imports the CSV data and returns it as an array of strings.
 // TODO: add the ability to specify a delimiter
