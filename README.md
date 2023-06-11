@@ -11,7 +11,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary><h3>Table of Contents</h3></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -25,6 +25,7 @@
       <a href="#my-approach">My Approach</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#be-aware">Be Aware</a></li>
       </ul>
     </li>
     <li>
@@ -47,6 +48,10 @@
         </li>
         <li>
           <a href="#notes-on-implementation">Notes On Implementation</a>
+          <ul>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#other-considerations">Other Considerations</a></li>
+          </ul>
         </li>
       </ol>
     </li>
@@ -70,6 +75,10 @@
         </li>
         <li>
           <a href="#notes-on-implementation-1">Notes On Implementation</a>
+          <ul>
+            <li><a href="#how-it-works-1">How It Works</a></li>
+            <li><a href="#other-considerations-1">Other Considerations</a></li>
+          </ul>
         </li>
       </ol>
     </li>
@@ -114,13 +123,13 @@ Please include unit test cases. Use whatever programming language you feel comfo
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## My Approach
-The job description mentioned they were looking for someone with scripting experience in either Python or Bash and programming experience in Java, Go, Javascript and Typescript. Given those qualifications, I thought it'd be best to write this project in TypeScript/JavaScript and, if time allowed, Python. 
+The job description mentioned they were looking for someone with programming experience in Java, Go, Javascript, Typescript and scripting experience in either Python or Bash. Given those qualifications, I thought it'd be best to write this project in TypeScript/JavaScript and, if time allowed, Python. 
 ### Built With
 
-* [![TypeScript][TypeScript.com]][TypeScript-url]
-* [![JavaScript][JavaScript.com]][JavaScript-url]
-* [![Node][Node.com]][Node-url]
-* [![Python][Python.com]][Python-url]
+[![Python][Python.com]][Python-url]
+[![TypeScript][TypeScript.com]][TypeScript-url]
+[![JavaScript][JavaScript.com]][JavaScript-url]
+[![Node][Node.com]][Node-url]
 
 ### *Be Aware*
 
@@ -129,6 +138,8 @@ From here this README is split into 2 different, equivalent, sections: __Python_
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Python
+
+One version of this project is written in Python. The `run.py` is a script file that acts as a small adapter that leverages the methods in the `compare.py` file, where the real logic is contained.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -167,7 +178,7 @@ Once you've installed Python, running it should be a cinch. From the root folder
     Customers that are in both lists:  [{'first_name': 'James', 'last_name': 'Davis', ...
    ```
 
-As you can see from the example above, the default output is an array of dictionaries listing the customers you have patronized both stoes.
+As you can see from the example above, the default output is an array of dictionaries listing the customers who have patronized both stores.
 
 ### Using Other Data
 
@@ -209,58 +220,169 @@ OK
 
 ## Notes On Implementation
 
-- I implemented this version of the comparison slightly different than in the JavaScript version (more details on that in the respective section, [below](#notes-on-implementation-1)). In the Python implementation, I create 2 dictionaries to make the comparison. This takes up more space than the JavaScript version because, in the JavaScript one, I only create one dictionary and iterate over the customers in the other file to make the comparison in place. They both run in O(n) time, but, for really large values of n, this will likely start to run faster than the JavaScript implementation, but it will also take up a lot more space. 
-- If you look at the `run.py` and the `compare.py` files, you'll see that the `run.py` file is a script file that leverages the methods in the `compare.py`. I but I couldn't, for the life of me, figure out how to run tests on the `run.py` script file. I think this is ok, though, because it's essentially just working as a small adapter and any issues would probably make the script fail pretty evidently. Just wanted to point that out. I could be wrong, of course !
+### How It Works
+
+As mentioned above, the `run.py` file is a script file that acts as the entrypoint for the app. It orchestrates the use of 3 methods in the `compare.py` file to return a result: 
+
+- `csv_to_data_set`: takes a CSV file and returns the data as an array of dictionaries.
+- `intersection`: *__CORE LOGIC__* this is where the sausage is made. It takes the lists, compares them, and returns the intersection set.
+- `print_intersection`: takes the result from `intersection` and returns it to the user in the way they prefer (either printed to the screen or written to a file)
+
+### Other Considerations
+
+- I couldn't, for the life of me, figure out how to run tests on the `run.py` script file. I think this is ok, though, because it's essentially just working as a small adapter and any issues would probably make the script fail pretty evidently. Just wanted to point that out. I could be wrong, of course !
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # JavaScript
+
+This project is also written in TypeScript, which gets compiled to JavaScript. Similar to the Python version, the `js-entrypoint` acts as a small adapter that leverages the `test-automation-lib` where the real logic is contained and is written completely in TypeScript. 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-This project is meant to run on Python3. Most of the functionality works on Python2 also, but writing to files and running tests raises errors so this documentation assumes you will be using Python3.
+To get it up and running, you'll need to have Yarn and Node installed. Ideally you have the latest versions of each, however, it will work with at least:
+
+- Node 16 (NOTE: TEST THIS)
+- Yarn 1.22 (NOTE: TEST THIS ON YARN 2)
 
 ### Installation
 
-1. If you happen to have a Mac, the easiest way to download Python3 is to use homebrew:
+1. If you happen to have a Mac, the easiest way to download Node and Yarn is to use homebrew:
 
-* Installing python3 on Mac with Homebrew
+* Installing Node and Yarn on Mac with Homebrew
 
   ```sh
-  brew install python
+  brew install node
+  brew install yarn
   ```
-Otherwise, download the latest version [here](https://www.python.org/downloads/).
+Otherwise, you can use the links below :
+
+- [Node](https://nodejs.org/en/download)
+- [Yarn](https://yarnpkg.com/getting-started/install)
 
 2. When you're done, do a quick check to confirm by printing the version number: 
 
+NOTE: CHANGE THIS TO THE LATEST VERSIONS
+
    ```sh
-    ~> python3 -V
-    Python 3.11.1
+    ~> node -v
+    v16.13.1
+    ~> yarn -v
+    1.22.10
    ```
+
+3. Next, you'll have to install the node 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+Once you've got Node and Yarn installed, running it should be a cinch. From the root folder, just type `python3` with the name of the file to run the script:
 
+   ```sh
+    test-automation-proj ~> python3 compare_py/run.py
+    Customers that are in both lists:  [{'first_name': 'James', 'last_name': 'Davis', ...
+   ```
+
+As you can see from the example above, the default output is an array of dictionaries listing the customers who have patronized both stores.
 
 ### Using Other Data
 
+The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to 
+
+1. Make sure your data is in a CSV in the same format as the Store files (*comma delimmited and with First Name,Last Name,Age,State as headers*). 
+2. Copy your data CSV file into the root directory.
+3. To run the app against your data, you'll need to specify the file names you'd like to compare. For example, if the file you copied over is called `custom_data.csv`, and you'd like to compare that file with the provided `Store1.csv`, the command would look something like this:
+
+   ```sh
+    ~> python3 compare_py/run.py Store1.csv custom_data.csv
+    Customers that are in both lists:  [{'first_name': 'Leo', 'last_name': ...]
+    ```
 
 ### Output To File
 
+Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
+
+   ```sh
+    ~> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
+    Customers saved to:  new_comparison.csv
+   ```
+You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.
+
 ### Running Tests
 
+Running tests is relatively straightforward. The only caveat is that you have to run them from their respective folders, `js-entrypoint` and `test-automation-lib`:
 
+- `js-entrypoint`
+
+NOTE: FINISH THIS
+
+  ```sh
+    ~> yarn test
+    yarn run v2
+    $ jest
+    PASS  __tests__/importData.spec.ts
+    PASS  __tests__/CustomerValidator.spec.ts
+    PASS  __tests__/Comparer.spec.ts
+    PASS  __tests__/CustomerBuilder.spec.ts
+    PASS  __tests__/Customer.spec.ts
+
+    Test Suites: 5 passed, 5 total
+    Tests:       21 passed, 21 total
+    Snapshots:   0 total
+    Time:        5.222 s, estimated 6 s
+    Ran all test suites.
+    ✨  Done in 6.13s.
+   ```
+
+- `test-automation-lib`
+
+  ```sh
+    ~> yarn test
+    yarn run v2
+    $ jest
+    PASS  __tests__/importData.spec.ts
+    PASS  __tests__/CustomerValidator.spec.ts
+    PASS  __tests__/Comparer.spec.ts
+    PASS  __tests__/CustomerBuilder.spec.ts
+    PASS  __tests__/Customer.spec.ts
+
+    Test Suites: 5 passed, 5 total
+    Tests:       21 passed, 21 total
+    Snapshots:   0 total
+    Time:        5.222 s, estimated 6 s
+    Ran all test suites.
+    ✨  Done in 6.13s.
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Notes On Implementation
 
+### How It Works
 
+I used a slightly different implementation to run on the JavaScript side. The `compareCustomers` function works almost exactly like the Python version. Like the Python version, it acts like an orchestrator, leveraging 3 functions to do the work:
+
+- `importData`: takes the CSV data and converts it into a 2-dimmensional array.
+- `intersection`: *__CORE LOGIC__* Once the `Comparer` is instanitated with the imported data, it takes the arrays, compares them, and returns the intersection set.
+- `serialize`: Calls `.getObj` on the `Customer` instances to serialize the output.
+
+You'll notice that the `test-automation-lib` has a much more Object Oriented approach than the Python version. The `index.ts` uses a couple of functions to parse the data, but, besides that, the `compareCustomers` function leverages the `Comparer` class to abstract away most of the core logic. The `Comparer` class has one function to call where the core logic is contained, `intersection`.
+
+### Other Considerations
+
+- You'll notice that a bunch of errors are raised when the app is run...
+   ```sh
+  ~> node js-entrypoint/index.js 
+  Error while trying to build a new CustomerBuilder: age ""Age"" is invalid
+  Error while trying to build a new CustomerBuilder: firstName is required, lastName is required, stateOfResidence is required
+  ...
+   ```
+  These are really just warnings and they come as a result of making the app more robust. It doesn't assume the file has headers and doesn't assume that all the rows have valid data. When it encounters either of these situations, it raises a warning. Not sure if it makes sense to supress this or not but wanted to point it out.
+- The `randomBadData` helper in the `CustomerValidator.spec.ts` file randomly . Not sure if this is best testing practice, but I do think that throwing some inconsistency into testing, *__if it can be properly controlled__* (I understand this can be a __BIG IF__), is very useful. Like [Chaos Monkey](https://netflix.github.io/chaosmonkey/) at Netflix, which "randomly terminating instances in production to ensure that engineers implement their services to be resilient to instance failures", I think a bit of randomness can be good to test your systems. As always, these are strong convictions loosely held. Would love to discuss more with the team !!
+- There's a __TODO__ in the `importData` function to be able to specify a delimiter. Some files use tabs or semi colons. Being able to specify a delimiter would make this implementation a bit more robust.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
