@@ -4,6 +4,7 @@ import { badDataList, goodData } from './utils/fixtures';
 
 // NOTE: NOT SURE IF RANDOMIZING IS BEST PRACTICE BUT I DO THINK IT'S VALUABLE TO 
 // THROW SOME CHAOS MONKEY TYPE STUFF IN YOUR APP. COULD BE CONVINCED OTHERWISE !!
+// THIS IS ALSO DISCUSSED IN THE README
 
 const randomBadData = () => {
   let expectedErrorList: string[] = []

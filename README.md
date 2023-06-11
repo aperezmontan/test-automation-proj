@@ -267,8 +267,6 @@ Otherwise, you can use the links below :
 
 2. When you're done, do a quick check to confirm by printing the version number: 
 
-NOTE: CHANGE THIS TO THE LATEST VERSIONS
-
    ```sh
     ~> node -v
     v18.16.0

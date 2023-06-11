@@ -15,22 +15,21 @@ interface OptionsType {
 // FUNCTIONS
 
 // The orchestrator
+// TODO: add the ability to import the delimiter
 export const compareCustomers = async ({ firstFileName, secondFileName, options = {} }: { firstFileName: string, secondFileName: string, options?: OptionsType }): Promise<CustomerEntityType[]> => {
   const { firstFileDelimiter, secondFileDelimiter } = options;
   const firstFileData = await importData({ filePath: firstFileName, delimiter: firstFileDelimiter });
   const secondFileData = await importData({ filePath: secondFileName, delimiter: secondFileDelimiter });
 
-  // NOTE: explain the dependency injection here with CustomerBuilder
   const comparer = new Comparer({ firstFileData, secondFileData, builder: CustomerBuilder })
   const intersectingCustomers = comparer.intersection();
-  // console.log("intersection", intersection)
+
   return intersectingCustomers.map(serialize)
 }
 
 export const createFileNameWithPath = ({ fileName }: { fileName: string }): string => path.join(__dirname, "../../", fileName);
 
 // Imports the CSV data and returns it as an array of strings.
-// TODO: add the ability to specify a delimiter
 const importData = async ({ filePath, delimiter = `,` }: { filePath: string, delimiter?: string }): Promise<string[][]> => {
   let parsedData: string[][] = [[]];
   const readStream = fs.createReadStream(filePath);
