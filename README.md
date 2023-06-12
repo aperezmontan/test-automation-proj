@@ -425,7 +425,7 @@ It's worth noting that the `test-automation-lib` adopts a more object-oriented a
 
 ### Other Considerations
 
--When running the app, you'll likely encounter a series of raised errors:
+- When running the app, you'll likely encounter a series of raised errors:
    ```sh
   ~> node js-entrypoint/index.js 
   Error while trying to build a new CustomerBuilder: age ""Age"" is invalid
