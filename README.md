@@ -25,9 +25,9 @@
       <a href="#my-approach">My Approach</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#be-aware">Be Aware</a></li>
       </ul>
     </li>
+    <li><a href="#be-aware">Be Aware</a></li>
     <li>
       <a href="#python">Python</a>
       <ol>
@@ -94,7 +94,7 @@
   <img src="images/test-automation-proj-sg.gif">
 </center>
 
-The good folks at Blockgraph asked my to complete this take home project with the intention of evaluating my general engineering capabilities. They sent me a zip file which included a README, the contents of which, Instructions, Deliverible and Hints, is included below:
+The Blockgraph team assigned me a take-home project to assess my overall engineering capabilities. They provided a zip file containing a README, which includes instructions, deliverables, and hints. Please find the detailed content of the README below:
 
 ### Instructions
 This zip file includes the following sample data. Assume these are customers on the email list for Store1 and Store2.
@@ -125,7 +125,7 @@ Please include unit test cases. Use whatever programming language you feel comfo
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## My Approach
-The job description mentioned they were looking for someone with programming experience in Java, Go, Javascript, Typescript and scripting experience in either Python or Bash. Given those qualifications, I thought it'd be best to write this project in TypeScript/JavaScript and, if time allowed, Python. 
+For this project, I considered the programming experience mentioned in the job description, which included Java, Go, JavaScript, TypeScript, and scripting experience in either Python or Bash. Based on these qualifications, I decided to implement the project using TypeScript/JavaScript and, time permitting, also explore the possibility of using Python. 
 ### Built With
 
 [![Python][Python.com]][Python-url]
@@ -133,35 +133,36 @@ The job description mentioned they were looking for someone with programming exp
 [![JavaScript][JavaScript.com]][JavaScript-url]
 [![Node][Node.com]][Node-url]
 
-### *Be Aware*
+## *Be Aware*
 
-From here this README is split into 2 different, equivalent, sections: __Python__ and __JavaScript__. Equivalent in that they both accomplish the task just using different languages. I encourage you to try both, but feel free to use whichever you're most comfortable with.
+Moving forward, the README is divided into two distinct sections: [__Python__](#python) and [__JavaScript__](#javascript). Both sections are equivalent in the sense that they achieve the same objective but using different programming languages. I encourage you to try both approaches, but feel free to choose the language you are most comfortable with.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Python
 
-One version of this project is written in Python. The `run.py` is a script file that acts as a small adapter that leverages the methods in the `compare.py` file, where the real logic is contained.
+The Python version of this project is implemented using a script file called `run.py`, which acts as a small adapter that utilizes the methods defined in the `compare.py` file, where the actual logic resides.
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-This project is meant to run on Python3. Most of the functionality works on Python2 also, but writing to files and running tests raises errors so this documentation assumes you will be using Python3.
+This project is designed to run on Python 3. While most of the functionality also works on Python 2, there may be issues with writing to files and running tests. Therefore, this documentation assumes that Python 3 will be used.
 
 ### Installation
 
-1. If you happen to have a Mac, the easiest way to download Python3 is to use homebrew:
+1. If you are using a Mac, the easiest way to install Python 3 is by using Homebrew. You can install Python 3 with the following command:
 
 * Installing python3 on Mac with Homebrew
 
   ```sh
   brew install python
   ```
-Otherwise, download the latest version [here](https://www.python.org/downloads/).
 
-2. When you're done, do a quick check to confirm by printing the version number: 
+  If you're using a different operating system, or don't have Homebrew, you can download the latest version of Python from the official website [here](https://www.python.org/downloads/).
+
+2. After installing Python 3, you can check the version number to verify the installation:
 
    ```sh
     ~> python3 -V
@@ -173,22 +174,24 @@ Otherwise, download the latest version [here](https://www.python.org/downloads/)
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once you've installed Python, running it should be a cinch. From the root folder, just type `python3` with the name of the file to run the script:
+Once Python is installed, running the script is simple. From the root folder, use the `python3` command followed by the name of the file to run the script:
 
    ```sh
     test-automation-proj ~> python3 compare_py/run.py
     Customers that are in both lists:  [{'first_name': 'James', 'last_name': 'Davis', ...
    ```
 
-As you can see from the example above, the default output is an array of dictionaries listing the customers who have patronized both stores.
+In the example above, the script outputs an array of dictionaries that lists the customers who have patronized both stores.
 
-### Using Other Data
+### Using Other Data 
 
-The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to: 
+By default, the script uses the provided `Store1.csv` and `Store2.csv` files. However, if you want to use your own data, you can do so! To use your own data, follow these steps:
 
-1. Make sure your data is in a CSV in the same format as the Store files (*comma delimmited and with First Name,Last Name,Age,State as headers*). 
+1. Ensure that your data is in a CSV file with the same format as the Store files (comma-delimited with the headers `First Name`, `Last Name`, `Age`, `State`).
+
 2. Copy your data CSV file into the root directory.
-3. To run the app against your data, you'll need to specify the file names you'd like to compare. For example, if the file you copied over is called `custom_data.csv`, and you'd like to compare that file with the provided `Store1.csv`, the command would look something like this:
+
+3. To run the script with your data, specify the file names you want to compare. For example, if you copied a file named `custom_data.csv` and want to compare it with the provided `Store1.csv`, the command would look like this:
 
    ```sh
     test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv
@@ -197,17 +200,17 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
 
 ### Output To File
 
-Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
+You also have the option to save the customers to a new CSV file. Simply specify a filename, and the results will be saved in the root directory. Continuing the example above, if you wanted to save the output of comparing `Store1.csv` and `custom_data.csv` to a file named `new_comparison.csv`, the command would be:
 
    ```sh
     test-automation-proj:> python3 compare_py/run.py Store1.csv custom_data.csv new_comparison.csv
     Customers saved to:  new_comparison.csv
    ```
-You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.
+You will now find the file `new_comparison.csv` in the root directory, containing all the customers that are in both lists.
 
 ### Running Tests
 
-Running tests is relatively straightforward. To see the tests run, just type:
+Running tests is straightforward. To run the tests, type the following command:
 
    ```sh
   test-automation-proj:> python3 compare_py/test_compare.py 
@@ -217,6 +220,7 @@ Ran 8 tests in 0.017s
 
 OK
    ```
+   This command executes the test cases, and if all tests pass, you will see an "OK" message.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -224,15 +228,15 @@ OK
 
 ### How It Works
 
-As mentioned above, the `run.py` file is a script file that acts as the entrypoint for the app. It orchestrates the use of 3 methods in the `compare.py` file to return a result: 
+In this implementation, the `run.py` file serves as the entry point for the application. It coordinates the usage of three methods from the `compare.py` file to produce a result:
 
-- `csv_to_data_set`: takes a CSV file and returns the data as an array of dictionaries.
-- `intersection`: *__CORE LOGIC__* this is where the sausage is made. It takes the lists, compares them, and returns the intersection set.
-- `print_intersection`: takes the result from `intersection` and returns it to the user in the way they prefer (either printed to the screen or written to a file)
+- `csv_to_data_set`: This method takes a CSV file and converts the data into an array of dictionaries.
+- `intersection`: *__CORE LOGIC__* This is the crucial part of the implementation. The intersection method compares the arrays and returns the intersection set.
+- `print_intersection`: This method takes the result from the `intersection` method and presents it to the user, either by printing it to the screen or writing it to a file according to their preference.
 
 ### Other Considerations
 
-- I couldn't, for the life of me, figure out how to run tests on the `run.py` script file. I think this is ok, though, because it's essentially just working as a small adapter and any issues would probably make the script fail pretty evidently. Just wanted to point that out. I could be wrong, of course !
+- I had some difficulties while attempting to run tests on the `run.py` script file. However, I believe this is not a major concern since the script mainly functions as an adapter, and any issues with it would likely be evident and result in the script failing. I wanted to mention this limitation, but it should not significantly impact the functionality of the application. I am open to feedback on this point, of course.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -240,19 +244,21 @@ As mentioned above, the `run.py` file is a script file that acts as the entrypoi
 
 This project is also written in TypeScript, which gets compiled to JavaScript. Similar to the Python version, the `js-entrypoint` acts as a small adapter that leverages the `test-automation-lib` where the real logic is contained and is written completely in TypeScript. 
 
+This project is also written in TypeScript, which is then compiled to JavaScript. Similar to the Python version, the `js-entrypoint` serves as a small adapter that utilizes the `test-automation-lib` where the actual logic is implemented, and it is written entirely in TypeScript.
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-To get it up and running, you'll need to have Yarn and Node at __these minimum versions__:
+To set up and run the project, you'll need to have Yarn and Node installed with the following __minimum versions__:
 
 - Node 18
 - Yarn 3
 
 ### Installation
 
-1. If you happen to have a Mac, the easiest way to download Node and Yarn is to use homebrew:
+1. If you're using a Mac, the easiest way to download Node and Yarn is through Homebrew:
 
 * Installing Node and Yarn on Mac with Homebrew
 
@@ -260,12 +266,12 @@ To get it up and running, you'll need to have Yarn and Node at __these minimum v
   brew install node
   brew install yarn
   ```
-Otherwise, you can use the links below :
+Otherwise, you can download them from the following links:
 
 - [Node](https://nodejs.org/en/download)
 - [Yarn](https://yarnpkg.com/getting-started/install)
 
-2. When you're done, do a quick check to confirm by printing the version number: 
+2. Once installed, verify the versions by running the following commands:
 
    ```sh
     ~> node -v
@@ -274,7 +280,9 @@ Otherwise, you can use the links below :
     3.6.0
    ```
 
-3. Now you can setup the app. First, go into the `test-automation-lib` folder and run `yarn install` followed by `yarn build`:
+### NOTE: These next few steps can be a bit tricky. Please take note of the folder you're working in when you're running the commands.
+
+3. Next, set up the `test-automation-lib` by navigating to the `test-automation-lib` folder and running `yarn install` followed by `yarn build`:
 
    ```sh
     test-automation-lib:> yarn install
@@ -291,7 +299,7 @@ Otherwise, you can use the links below :
    ```
 
 
-4. Once that's finished, we have to setup the `js-entrypoint` folder to be able to use the compiled JavaScript from the `test-automation-lib`. To do this, just run `yarn setup`
+4. After completing the setup of `test-automation-lib`, we need to configure the `js-entrypoint` folder to use the compiled JavaScript from `test-automation-lib`. To do this, navigate to the `js-entrypoint` folder from the root directory and run `yarn setup`:
 
    ```sh
     js-entrypoint:> yarn setup
@@ -304,12 +312,14 @@ Otherwise, you can use the links below :
     ➤ YN0000: Done with warnings in 0s 187ms
    ```
 
+    *Running the yarn setup command in the `js-entrypoint` folder establishes the necessary link between the `js-entrypoint` and the compiled JavaScript from the `test-automation-lib`. This enables the `js-entrypoint` to utilize the functionality provided by the compiled code.*
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Once you've got Node and Yarn installed and you've run all of the compilation scripts, running it should be very straightforward. From the root folder, just type `node` with the name of the file to run the script:
+Once you've got Node and Yarn installed and have completed all the necessary setup steps mentioned earlier, __navigagte to the root folder__ and type the following command to run the script:
 
    ```sh
   test-automation-proj:> node js-entrypoint/index.js 
@@ -329,17 +339,19 @@ Customers that are in both lists: [
   ...
    ```
 
-- *NOTE: there will be a series of errors before the final result is returned. This is addressed [here](#other-considerations-1).*
+- *NOTE: there will be a series of errors before the final result is returned. This is explained [here](#other-considerations-1).*
 
-As you can see from the example above, the default output is an array of dictionaries listing the customers who have patronized both stores.
+The default output is an array of dictionaries listing the customers who have patronized both stores.
 
 ### Using Other Data
 
-The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. However, if you'd like to use your own data, you can do that too ! For this, you'll need to: 
+The default behavior for this script is to use the provided `Store1.csv` and `Store2.csv` files. If you want to use your own data for comparison, follow these steps: 
 
-1. Make sure your data is in a CSV in the same format as the Store files (*comma delimmited and with First Name,Last Name,Age,State as headers*). 
-2. Copy your data CSV file into the root directory.
-3. To run the app against your data, you'll need to specify the file names you'd like to compare. For example, if the file you copied over is called `custom_data.csv`, and you'd like to compare that file with the provided `Store1.csv`, the command would look something like this:
+1. Ensure that your data is in a CSV format, following the same structure as the provided Store files (comma-delimited with the headers `First Name`, `Last Name`, `Age`, `State`).
+
+2. Copy your data CSV file into the root directory of the project.
+
+3. To run the script with your own data, specify the file names you want to compare. For example, if you copied a file named `custom_data.csv` and want to compare it with the provided `Store1.csv`, use the following command:
 
    ```sh
     test-automation-proj:> node js-entrypoint/index.js Store1.csv custom_data.csv
@@ -355,22 +367,31 @@ The default behavior for this script is to use the provided `Store1.csv` and `St
     ...
     ```
 
+    This will perform the comparison using the specified files.
+
 ### Output To File
 
-Finally, you also have the choice of saving the customers to a new CSV file. To do this, all you need to do is specify a filename and it will save the results in the root directory. Continuing the example from above, if you wanted to take the output from the comparison of `Store1.csv` and `custom_data.csv` and save it to a file called `new_comparison.csv`, that command would be:
+To save the comparison results to a new CSV file, specify a filename when running the script. The results will be saved in the root directory. Here's an example command:
 
    ```sh
     test-automation-proj:> node js-entrypoint/index.js Store1.csv custom_data.csv new_comparison.csv
     ...
     Results written to new_comparison.csv
    ```
-You should now see the file `new_comparison.csv` containing all of the customers in both lists in the root directory.
+
+This will save the results of the comparison between `Store1.csv` and `custom_data.csv` to a file named `new_comparison.csv`.
+
+You should now see the `new_comparison.csv` file containing all the customers found in both lists in the root directory.
 
 ### Running Tests
 
-*__NOTE: tests only run in test-automation-lib__*
+*__PLEASE NOTE: tests only run in test-automation-lib__*
 
-Running tests is also straightforward. All the functionality that needs to be tested is in the `test-automation-lib`. From that folder, run `yarn test`:
+To run the tests, follow these steps:
+
+1. Navigate to the `test-automation-lib` folder.
+
+2. Run `yarn test` to execute the tests:
 
   ```sh
     test-automation-proj:>  yarn test
@@ -394,33 +415,34 @@ Running tests is also straightforward. All the functionality that needs to be te
 
 ### How It Works
 
-I used a slightly different implementation to run on the JavaScript side. The `compareCustomers` function works almost exactly like the Python version. Like the Python version, it acts like an orchestrator, leveraging 3 functions to do the work:
+The JavaScript implementation of the project follows a slightly different approach compared to the Python version. The `compareCustomers` function serves as the orchestrator and utilizes three key functions to perform the necessary operations:
 
-- `importData`: takes the CSV data and converts it into a 2-dimmensional array.
-- `intersection`: *__CORE LOGIC__* Once the `Comparer` is instanitated with the imported data, it takes the arrays, compares them, and returns the intersection set.
-- `serialize`: Calls `.getObj` on the `Customer` instances to serialize the output.
+- `importData`: This function takes the CSV data and converts it into a two-dimensional array.
+- `intersection`: *__CORE LOGIC__* The `Comparer` class is instantiated with the imported data, and this function compares the arrays to find the intersection set. This set is a list of `Customer` instances.
+- `serialize`: The output is serialized by calling the `.getObj` method on the `Customer` instances.
 
-You'll notice that the `test-automation-lib` has a much more Object Oriented approach than the Python version. The `index.ts` uses a couple of functions to parse the data, but, besides that, the `compareCustomers` function leverages the `Comparer` class to abstract away most of the core logic. The `Comparer` class has one function to call where the core logic is contained, `intersection`.
+It's worth noting that the `test-automation-lib` adopts a more object-oriented approach compared to the Python version. While the `index.ts` file employs a few functions for data parsing, the `compareCustomers` function relies on the `Comparer` class to encapsulate most of the core logic. The `Comparer` class exposes the `intersection` function where the core comparison logic resides.
 
 ### Other Considerations
 
-- You'll notice that a bunch of errors are raised when the app is run...
+-When running the app, you'll likely encounter a series of raised errors:
    ```sh
   ~> node js-entrypoint/index.js 
   Error while trying to build a new CustomerBuilder: age ""Age"" is invalid
   Error while trying to build a new CustomerBuilder: firstName is required, lastName is required, stateOfResidence is required
   ...
    ```
-  These are really just warnings and they come as a result of making the app more robust. It doesn't assume the file has headers and doesn't assume that all the rows have valid data. When it encounters either of these situations, it raises a warning. Thought it would be more informative to show these errors rather than supress them but wanted to point it out.
+
+  These errors are actually warnings and are a result of attempting to enhance the app's robustness. The app does not assume the presence of headers in the CSV file and does not assume that all rows contain valid data. Therefore, when encountering such situations, the app raises warnings to provide informative feedback. Displaying these errors instead of suppressing them was done intentionally to offer transparency and highlight potential issues.
 
 - TESTS: 
-  1. Similar to the Python version, there are no tests for the `js-entrypoint.index.js` file. I think that's ok because all the functions that are called by that file are tested in the TypeScript section.
+  1. Similar to the Python version, the `js-entrypoint/index.js` file does not have dedicated tests. This is because all the functions called by that file are tested in the TypeScript section.
 
-  2. I'm not really happy with how I tested the `compareCustomers` function. It's basically an integration test, which does have some merit. However, for these kinds of "orchestration" functions, I prefer to just ensure that it's calling the correct functions in the correct order. However, I was having trouble with the mocking functionality in Jest so I couldn't get it to work the way I would have preferred.
+  2. The testing approach for the `compareCustomers` function may not be ideal. It currently utilizes an integration test strategy, which has its merits. However, for orchestration functions like `compareCustomers`, I think it's preferable to verify that the correct functions are called in the correct order. Due to my limited experience mocking functions with Jest, achieving this preferred approach was challenging.
   
-  3. The `randomBadData` helper in the `CustomerValidator.spec.ts` file randomly chooses different attributes to fail on. Not sure if this is best testing practice, but I do think that throwing some inconsistency into testing, *__if it can be properly controlled__* (I understand this can be a __BIG IF__), is very useful. Like [Chaos Monkey](https://netflix.github.io/chaosmonkey/) at Netflix, which "randomly terminating instances in production to ensure that engineers implement their services to be resilient to instance failures", I think a bit of randomness can be good to test your systems. As always, these are strong convictions loosely held. Would love to discuss more with the team !!
+  3. The `randomBadData` helper in the `CustomerValidator.spec.ts` file introduces randomness by choosing different attributes to fail on during testing. While this may not align with traditional testing practices, controlled randomness can be beneficial for evaluating system resilience. Netflix's [Chaos Monkey](https://netflix.github.io/chaosmonkey/) is an example of introducing random failures in production environments to ensure service resiliency. However, it is important to note that randomness in testing should be approached cautiously and with consideration for the specific context and requirements of the system. As always, these are strong convictions loosely held.
 
-- There's a __TODO__ in the `compareCustomers` function to be able to specify a delimiter. Some files use tabs or semi colons. Being able to specify a delimiter would make this implementation a bit more robust.
+- A __TODO__ comment exists in the `compareCustomers` function, suggesting the addition of a delimiter specification capability. Currently, the implementation assumes a comma delimiter for CSV files. Allowing the specification of a delimiter would enhance the robustness of the implementation by accommodating files that use different delimiters such as tabs or semicolons.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
